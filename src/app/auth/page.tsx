@@ -1,6 +1,7 @@
 "use client";
-import { supabase } from "../utils/supabase-client";
+import { supabase } from "@/utils/supabase-client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AuthForm = () => {
@@ -10,7 +11,7 @@ const AuthForm = () => {
     email: "",
     password: "",
   });
-
+  const router = useRouter();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -60,6 +61,7 @@ const AuthForm = () => {
           session.access_token
         }; expires=${expires.toUTCString()}; path=/`;
       }
+      router.push("/");
       console.log("Sign In Payload:", {
         email: formData.email,
         password: formData.password,
